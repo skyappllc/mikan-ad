@@ -1,0 +1,81 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactInfo, navigation, services } from '../data/site';
+---
+
+<BaseLayout
+  path="/contact"
+  title="お問い合わせ | 株式会社みかん"
+  description="株式会社みかんへのお問い合わせはこちら。広告手配、ポスティング、システム開発運用のご相談を受け付けています。"
+>
+  <Header navItems={navigation} currentPath={Astro.url.pathname} />
+
+  <main id="main-content">
+    <PageHero
+      kicker="Contact"
+      title="お問い合わせ"
+      lead="ご相談内容の整理段階から対応可能です。まずはメールでお気軽にご連絡ください。"
+    >
+      <a class="neo-btn" href={`mailto:${contactInfo.email}`}>メールで問い合わせる</a>
+    </PageHero>
+
+    <section class="section section--alt">
+      <div class="container contact-grid">
+        <article class="neo-card contact-primary" data-reveal>
+          <h2>窓口情報</h2>
+          <dl>
+            <div>
+              <dt>メール</dt>
+              <dd><a class="text-link" href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></dd>
+            </div>
+            <div>
+              <dt>営業時間</dt>
+              <dd>{contactInfo.officeHours}</dd>
+            </div>
+            <div>
+              <dt>返信目安</dt>
+              <dd>{contactInfo.responseTime}</dd>
+            </div>
+          </dl>
+          <a class="neo-btn" href={`mailto:${contactInfo.email}?subject=株式会社みかんへのお問い合わせ`}>メールを作成する</a>
+        </article>
+
+        <article class="neo-card" data-reveal data-reveal-delay="1">
+          <h2>主なご相談内容</h2>
+          <ul role="list" class="list-check">
+            {services.map((service) => <li>{service.title}</li>)}
+            <li>既存施策の改善レビュー</li>
+            <li>要件整理・見積のご相談</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <SectionTitle en="Process" ja="お問い合わせ後の流れ" />
+
+        <ol class="flow-list" role="list">
+          <li class="neo-card" data-reveal data-reveal-delay="1">
+            <h3>1. ご連絡受付</h3>
+            <p>課題感、目的、希望時期が未確定でも問題ありません。</p>
+          </li>
+          <li class="neo-card" data-reveal data-reveal-delay="2">
+            <h3>2. 初回ヒアリング</h3>
+            <p>オンラインまたはメールで現状と要件を確認します。</p>
+          </li>
+          <li class="neo-card" data-reveal data-reveal-delay="3">
+            <h3>3. ご提案</h3>
+            <p>実行ステップ、見積、スケジュールを明確に提示します。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <Footer navItems={navigation} contact={contactInfo} />
+</BaseLayout>

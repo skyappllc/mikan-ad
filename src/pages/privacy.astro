@@ -1,0 +1,57 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactInfo, navigation, policySections } from '../data/site';
+---
+
+<BaseLayout
+  path="/privacy"
+  title="プライバシーポリシー | 株式会社みかん"
+  description="株式会社みかんのプライバシーポリシーです。個人情報の取得・利用・管理方針を明記しています。"
+>
+  <Header navItems={navigation} currentPath={Astro.url.pathname} />
+
+  <main id="main-content">
+    <PageHero
+      kicker="Privacy Policy"
+      title="プライバシーポリシー"
+      lead="株式会社みかんは、個人情報保護の重要性を認識し、適切な取り扱いと安全管理を行います。"
+    />
+
+    <section class="section">
+      <div class="container">
+        <article class="neo-card policy-intro" data-reveal>
+          <p>
+            本ポリシーは、株式会社みかん（以下「当社」）が提供するサービスに関連して取得する個人情報の取り扱い方針を示すものです。
+            適用開始日: 2026年2月26日
+          </p>
+        </article>
+
+        <div class="policy-list">
+          {
+            policySections.map((section, index) => (
+              <article class="neo-card" data-reveal data-reveal-delay={String(index + 1)}>
+                <h2>{section.title}</h2>
+                <p>{section.body}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <article class="neo-card" data-reveal data-reveal-delay="7">
+          <h2>改定について</h2>
+          <p>
+            本ポリシーは法令改正や運用変更に応じて改定する場合があります。重要な変更がある場合は本サイト上で告知します。
+          </p>
+          <p>
+            お問い合わせ: <a class="text-link" href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer navItems={navigation} contact={contactInfo} />
+</BaseLayout>

@@ -1,0 +1,45 @@
+---
+import type { ContactInfo, NavItem } from '../data/site';
+
+interface Props {
+  navItems: NavItem[];
+  contact: ContactInfo;
+}
+
+const { navItems, contact } = Astro.props;
+const thisYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section>
+      <h2>株式会社みかん</h2>
+      <p>広告とテクノロジーを横断し、事業成長を着実に支えるパートナーを目指しています。</p>
+      <a class="inline-mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+    </section>
+
+    <section>
+      <h2>サイトマップ</h2>
+      <ul role="list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>営業時間</h2>
+      <p>{contact.officeHours}</p>
+      <p>{contact.responseTime}</p>
+      <a class="neo-btn neo-btn--small" href="/contact">お問い合わせへ</a>
+    </section>
+  </div>
+
+  <div class="container footer-note">
+    <p>© 2015-{thisYear} 株式会社みかん. All rights reserved.</p>
+  </div>
+</footer>
