@@ -7,6 +7,7 @@ import Services from '../components/Services.astro';
 import CompanyInfo from '../components/CompanyInfo.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import SectionDivider from '../components/SectionDivider.astro';
 ---
 
 <BaseLayout
@@ -16,9 +17,13 @@ import Footer from '../components/Footer.astro';
   <Header />
   <main id="main-content">
     <Hero />
+    <SectionDivider topColor="#FF8C00" bottomColor="#FFFDE7" />
     <About />
+    <SectionDivider topColor="#FFFDE7" bottomColor="#FAFAFA" flip />
     <Services />
+    <SectionDivider topColor="#FAFAFA" bottomColor="#FFF3E0" />
     <CompanyInfo />
+    <SectionDivider topColor="#FFF3E0" bottomColor="#1A1A1A" flip />
     <Contact />
   </main>
   <Footer />

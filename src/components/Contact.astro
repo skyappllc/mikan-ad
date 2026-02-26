@@ -1,14 +1,26 @@
 ---
-const email = 'info@mikan-corp.jp';
+import { CONTACT_EMAIL } from '../data/site';
 ---
 
 <section
   id="contact"
-  class="py-20 md:py-28"
-  style="background-color: #1A1A1A;"
+  class="relative py-20 md:py-28 overflow-hidden bg-ink"
   aria-labelledby="contact-heading"
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <!-- 装飾: 斜線パターン背景 (白線) -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-5"
+    style="background-image: repeating-linear-gradient(45deg, white, white 1px, transparent 1px, transparent 10px);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- 装飾: 右上の円 -->
+  <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full border-[4px] border-white opacity-5 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- 装飾: 左下の四角形 -->
+  <div class="absolute -bottom-8 -left-8 w-32 h-32 border-[4px] border-mikan rotate-12 opacity-10 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -19,7 +31,7 @@ const email = 'info@mikan-corp.jp';
         </span>
         <h2
           id="contact-heading"
-          class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6"
+          class="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
         >
           お問い合わせ
         </h2>
@@ -45,10 +57,7 @@ const email = 'info@mikan-corp.jp';
 
       <!-- CTAカード -->
       <div data-reveal data-reveal-delay="2">
-        <div
-          class="p-8 md:p-10 bg-white border-[3px] border-mikan"
-          style="box-shadow: 6px 6px 0 #FF8C00;"
-        >
+        <div class="p-8 md:p-10 bg-white border-[3px] border-mikan brutal-shadow-lg-orange">
           <div class="text-center">
             <div class="text-6xl mb-6" aria-hidden="true">✉️</div>
             <h3 class="text-2xl font-black text-ink mb-3">
@@ -62,11 +71,8 @@ const email = 'info@mikan-corp.jp';
 
             <!-- メールボタン -->
             <a
-              href={`mailto:${email}?subject=お問い合わせ（コーポレートサイトより）`}
-              class="inline-flex items-center justify-center gap-3 w-full px-8 py-5 bg-mikan text-white font-black text-lg no-underline mb-4"
-              style="border: 3px solid #1A1A1A; box-shadow: 4px 4px 0 #1A1A1A; transition: box-shadow 0.1s, transform 0.1s;"
-              onmouseover="this.style.boxShadow='2px 2px 0 #1A1A1A'; this.style.transform='translate(2px,2px)';"
-              onmouseout="this.style.boxShadow='4px 4px 0 #1A1A1A'; this.style.transform='translate(0,0)';"
+              href={`mailto:${CONTACT_EMAIL}?subject=お問い合わせ（コーポレートサイトより）`}
+              class="inline-flex items-center justify-center gap-3 w-full px-8 py-5 bg-mikan text-white font-black text-lg no-underline mb-4 brutal-btn"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M3 8L10.89 13.26C11.2187 13.4793 11.6049 13.5963 12 13.5963C12.3951 13.5963 12.7813 13.4793 13.11 13.26L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -75,7 +81,7 @@ const email = 'info@mikan-corp.jp';
             </a>
 
             <p class="text-xs text-ink opacity-50 mt-4">
-              {email}
+              {CONTACT_EMAIL}
             </p>
 
             <!-- 区切り -->

@@ -1,16 +1,10 @@
 ---
-const navLinks = [
-  { href: '#about', label: '会社概要' },
-  { href: '#services', label: 'サービス' },
-  { href: '#company', label: '会社情報' },
-  { href: '#contact', label: 'お問い合わせ' },
-];
+import { NAV_LINKS } from '../data/site';
 ---
 
 <header
   id="site-header"
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-paper border-b-[3px] border-ink"
-  style="border-bottom: 3px solid #1A1A1A;"
 >
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-16 md:h-20">
@@ -24,14 +18,14 @@ const navLinks = [
           🍊
         </span>
         <span class="tracking-tight">
-          <span class="text-mikan">みかん</span>
+          株式会社<span class="text-mikan">みかん</span>
         </span>
       </a>
 
       <!-- デスクトップナビゲーション -->
       <nav aria-label="メインナビゲーション" class="hidden md:block">
         <ul class="flex items-center gap-1" role="list">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <li>
               <a
                 href={link.href}
@@ -74,12 +68,12 @@ const navLinks = [
   <!-- モバイルメニュー -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden border-t-[3px] border-ink bg-paper"
+    class="md:hidden mobile-menu border-t-[3px] border-ink bg-paper"
     role="navigation"
     aria-label="モバイルナビゲーション"
   >
     <ul class="flex flex-col" role="list">
-      {navLinks.map((link) => (
+      {NAV_LINKS.map((link) => (
         <li>
           <a
             href={link.href}
@@ -113,17 +107,17 @@ const navLinks = [
 
   if (btn && menu) {
     btn.addEventListener('click', () => {
-      const isOpen = !menu.classList.contains('hidden');
+      const isOpen = menu.classList.contains('open');
 
       if (isOpen) {
-        menu.classList.add('hidden');
+        menu.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'メニューを開く');
         h1?.classList.remove('rotate-45', 'translate-y-[7.5px]');
         h2?.classList.remove('opacity-0');
         h3?.classList.remove('-rotate-45', '-translate-y-[7.5px]');
       } else {
-        menu.classList.remove('hidden');
+        menu.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
         btn.setAttribute('aria-label', 'メニューを閉じる');
         h1?.classList.add('rotate-45', 'translate-y-[7.5px]');
@@ -135,7 +129,7 @@ const navLinks = [
     // メニュー内リンクをクリックしたら閉じる
     menu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        menu.classList.add('hidden');
+        menu.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'メニューを開く');
         h1?.classList.remove('rotate-45', 'translate-y-[7.5px]');
@@ -151,5 +145,6 @@ const navLinks = [
     background-color: rgba(250, 250, 250, 0.92);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   }
 </style>

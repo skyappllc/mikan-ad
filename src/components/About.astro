@@ -3,11 +3,19 @@
 
 <section
   id="about"
-  class="py-20 md:py-28"
-  style="background-color: #FFFDE7;"
+  class="relative py-20 md:py-28 overflow-hidden bg-cream"
   aria-labelledby="about-heading"
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <!-- 装飾: ドットパターン背景 -->
+  <div class="absolute inset-0 bg-pattern-dots opacity-5 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- 装飾: 右上の回転四角形 -->
+  <div class="absolute -top-10 -right-10 w-40 h-40 border-[5px] border-ink rotate-12 opacity-10 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- 装飾: 左下の円 -->
+  <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full border-[4px] border-ink opacity-8 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
 
     <!-- セクションヘッダー -->
     <div class="mb-16" data-reveal>
@@ -16,7 +24,7 @@
       </span>
       <h2
         id="about-heading"
-        class="text-4xl md:text-5xl lg:text-6xl font-black text-ink leading-tight"
+        class="font-display text-4xl md:text-5xl lg:text-6xl text-ink leading-tight"
       >
         会社概要
       </h2>
@@ -28,10 +36,7 @@
 
       <!-- ミッションカード -->
       <div data-reveal data-reveal-delay="1">
-        <div
-          class="p-8 md:p-10 bg-white border-[3px] border-ink"
-          style="box-shadow: 6px 6px 0 #1A1A1A;"
-        >
+        <div class="p-8 md:p-10 bg-white border-[3px] border-ink brutal-shadow-lg">
           <div class="flex items-center gap-3 mb-6">
             <div class="w-10 h-10 bg-mikan border-[3px] border-ink flex items-center justify-center text-xl flex-shrink-0">
               🍊
@@ -55,10 +60,7 @@
       <!-- 強みカード群 -->
       <div class="flex flex-col gap-6" data-reveal data-reveal-delay="2">
 
-        <div
-          class="flex gap-4 p-6 bg-white border-[3px] border-ink transition-all duration-150 hover:-translate-y-0.5"
-          style="box-shadow: 4px 4px 0 #1A1A1A;"
-        >
+        <div class="flex gap-4 p-6 bg-white border-[3px] border-ink brutal-shadow brutal-card-lift">
           <div class="flex-shrink-0 w-12 h-12 bg-mikan-pale border-[3px] border-ink flex items-center justify-center text-2xl">
             📢
           </div>
@@ -71,10 +73,7 @@
           </div>
         </div>
 
-        <div
-          class="flex gap-4 p-6 bg-white border-[3px] border-ink transition-all duration-150 hover:-translate-y-0.5"
-          style="box-shadow: 4px 4px 0 #1A1A1A;"
-        >
+        <div class="flex gap-4 p-6 bg-white border-[3px] border-ink brutal-shadow brutal-card-lift">
           <div class="flex-shrink-0 w-12 h-12 bg-mikan-pale border-[3px] border-ink flex items-center justify-center text-2xl">
             🚀
           </div>
@@ -87,10 +86,7 @@
           </div>
         </div>
 
-        <div
-          class="flex gap-4 p-6 bg-white border-[3px] border-ink transition-all duration-150 hover:-translate-y-0.5"
-          style="box-shadow: 4px 4px 0 #1A1A1A;"
-        >
+        <div class="flex gap-4 p-6 bg-white border-[3px] border-ink brutal-shadow brutal-card-lift">
           <div class="flex-shrink-0 w-12 h-12 bg-mikan-pale border-[3px] border-ink flex items-center justify-center text-2xl">
             💡
           </div>
