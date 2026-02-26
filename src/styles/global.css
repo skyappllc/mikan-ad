@@ -295,4 +295,67 @@
       linear-gradient(90deg, var(--color-ink) 1px, transparent 1px);
     background-size: 40px 40px;
   }
+
+  /* フォーム入力 */
+  .brutal-input {
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-brutal-sm);
+    background-color: white;
+    color: var(--color-ink);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    outline: none;
+  }
+
+  .brutal-input:focus {
+    border-color: var(--color-mikan);
+    box-shadow: 2px 2px 0px var(--color-mikan);
+  }
+
+  .brutal-input.error {
+    border-color: #dc2626;
+    box-shadow: 2px 2px 0px #dc2626;
+  }
+
+  .brutal-select {
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-brutal-sm);
+    background-color: white;
+    color: var(--color-ink);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231A1A1A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    outline: none;
+  }
+
+  .brutal-select:focus {
+    border-color: var(--color-mikan);
+    box-shadow: 2px 2px 0px var(--color-mikan);
+  }
+
+  .brutal-select.error {
+    border-color: #dc2626;
+    box-shadow: 2px 2px 0px #dc2626;
+  }
+}
+
+/* シェイクアニメーション（バリデーションエラー時） */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.4s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shake {
+    animation: none;
+  }
 }

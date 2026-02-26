@@ -1,0 +1,128 @@
+---
+import { INQUIRY_TYPES } from '../data/site';
+---
+
+<form id="contact-form" novalidate class="space-y-5">
+
+  <!-- ハニーポット (スパム対策: 画面外に隠す) -->
+  <div
+    class="absolute"
+    style="left:-9999px;top:-9999px;width:0;height:0;overflow:hidden;"
+    aria-hidden="true"
+  >
+    <label for="_honey">このフィールドは入力しないでください</label>
+    <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <!-- タイムスタンプ (高速送信ボット対策) -->
+  <input type="hidden" id="_timestamp" name="_timestamp" value="" />
+
+  <!-- お名前 -->
+  <div>
+    <label for="name" class="block text-sm font-black text-ink mb-1">
+      お名前 <span class="text-red-600" aria-label="必須">*</span>
+    </label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      autocomplete="name"
+      maxlength="100"
+      class="brutal-input w-full px-4 py-3 text-sm"
+      placeholder="山田 太郎"
+    />
+    <p class="hidden text-xs text-red-600 mt-1 font-bold" data-error="name" role="alert"></p>
+  </div>
+
+  <!-- メールアドレス -->
+  <div>
+    <label for="email" class="block text-sm font-black text-ink mb-1">
+      メールアドレス <span class="text-red-600" aria-label="必須">*</span>
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      autocomplete="email"
+      class="brutal-input w-full px-4 py-3 text-sm"
+      placeholder="taro@example.com"
+    />
+    <p class="hidden text-xs text-red-600 mt-1 font-bold" data-error="email" role="alert"></p>
+  </div>
+
+  <!-- 会社名 -->
+  <div>
+    <label for="company" class="block text-sm font-black text-ink mb-1">
+      会社名 <span class="text-xs font-normal opacity-50">（任意）</span>
+    </label>
+    <input
+      type="text"
+      id="company"
+      name="company"
+      autocomplete="organization"
+      maxlength="100"
+      class="brutal-input w-full px-4 py-3 text-sm"
+      placeholder="株式会社〇〇"
+    />
+    <p class="hidden text-xs text-red-600 mt-1 font-bold" data-error="company" role="alert"></p>
+  </div>
+
+  <!-- お問い合わせ種別 -->
+  <div>
+    <label for="inquiry_type" class="block text-sm font-black text-ink mb-1">
+      お問い合わせ種別 <span class="text-red-600" aria-label="必須">*</span>
+    </label>
+    <select
+      id="inquiry_type"
+      name="inquiry_type"
+      required
+      class="brutal-select w-full px-4 py-3 text-sm"
+    >
+      <option value="">選択してください</option>
+      {INQUIRY_TYPES.map(({ value, label }) => (
+        <option value={value}>{label}</option>
+      ))}
+    </select>
+    <p class="hidden text-xs text-red-600 mt-1 font-bold" data-error="inquiry_type" role="alert"></p>
+  </div>
+
+  <!-- お問い合わせ内容 -->
+  <div>
+    <label for="message" class="block text-sm font-black text-ink mb-1">
+      お問い合わせ内容 <span class="text-red-600" aria-label="必須">*</span>
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="5"
+      maxlength="2000"
+      class="brutal-input w-full px-4 py-3 text-sm resize-y"
+      placeholder="ご相談内容をできるだけ詳しくご記入ください（10文字以上）"
+    ></textarea>
+    <div class="flex justify-between items-start mt-1 gap-2">
+      <p class="hidden text-xs text-red-600 font-bold flex-1" data-error="message" role="alert"></p>
+      <p class="text-xs text-ink opacity-40 ml-auto whitespace-nowrap">
+        <span id="char-count">0</span> / 2000
+      </p>
+    </div>
+  </div>
+
+  <!-- 送信ボタン -->
+  <div>
+    <button
+      type="submit"
+      id="submit-btn"
+      class="inline-flex items-center justify-center gap-3 w-full px-8 py-5 bg-mikan text-white font-black text-base brutal-btn"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span id="submit-label">送信する</span>
+    </button>
+    <p class="hidden text-xs text-red-600 mt-2 font-bold text-center" id="form-server-error" role="alert"></p>
+  </div>
+
+</form>
