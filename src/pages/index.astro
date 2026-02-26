@@ -1,0 +1,128 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { companyProfile, contactInfo, homeHighlights, navigation, services } from '../data/site';
+---
+
+<BaseLayout path="/">
+  <Header navItems={navigation} currentPath={Astro.url.pathname} />
+
+  <main id="main-content">
+    <section class="home-hero">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <p class="kicker">Corporate Website</p>
+          <h1>
+            広告とシステム開発を
+            <span>一体で設計する。</span>
+          </h1>
+          <p>
+            株式会社みかんは、広告業とシステム開発業を軸に、
+            実行できる戦略と継続運用を提供します。
+          </p>
+          <ul class="brutalist-chip-row" role="list" aria-label="対応領域">
+            <li>AD OPS</li>
+            <li>POSTING</li>
+            <li>SYSTEM DEV</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="neo-btn" href="/services">サービスを見る</a>
+            <a class="neo-btn neo-btn--ghost" href="/contact">相談する</a>
+          </div>
+        </div>
+
+        <aside class="neo-card hero-panel" data-reveal data-reveal-delay="1" aria-label="会社概要サマリー">
+          <h2>会社概要</h2>
+          <dl>
+            <div>
+              <dt>会社名</dt>
+              <dd>{companyProfile.name}</dd>
+            </div>
+            <div>
+              <dt>設立</dt>
+              <dd>{companyProfile.founded}</dd>
+            </div>
+            <div>
+              <dt>業種</dt>
+              <dd>{companyProfile.industry}</dd>
+            </div>
+            <div>
+              <dt>所在地</dt>
+              <dd>{companyProfile.address}</dd>
+            </div>
+          </dl>
+          <a href="/company" class="text-link">会社情報ページへ</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <SectionTitle
+          en="Why Mikan"
+          ja="選ばれる理由"
+          description="プロフェッショナルな判断とスピードを両立させ、事業成果につながる実装を重視しています。"
+        />
+
+        <div class="card-grid card-grid--3">
+          {
+            homeHighlights.map((item, index) => (
+              <article class="neo-card" data-reveal data-reveal-delay={String(index + 1)}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <SectionTitle
+          en="Services"
+          ja="主なサービス"
+          description="事業課題に応じて、広告施策とシステム施策を横断して設計します。"
+        />
+
+        <div class="card-grid card-grid--3">
+          {
+            services.map((service, index) => (
+              <article class="neo-card service-card" data-accent={service.accent} data-reveal data-reveal-delay={String(index + 1)}>
+                <h3>{service.title}</h3>
+                <p>{service.summary}</p>
+                <ul role="list" class="list-check">
+                  {service.details.map((detail) => <li>{detail}</li>)}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="section-cta" data-reveal data-reveal-delay="4">
+          <a class="neo-btn" href="/services">サービス詳細を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-cta neo-card" data-reveal>
+        <div>
+          <p class="kicker">Contact</p>
+          <h2>課題の整理からご一緒します</h2>
+          <p>
+            施策検討段階でも問題ありません。目的、予算、期限を踏まえた実行可能な進め方をご提案します。
+          </p>
+        </div>
+        <div class="contact-cta-actions">
+          <a class="neo-btn" href="/contact">お問い合わせへ</a>
+          <a class="text-link" href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer navItems={navigation} contact={contactInfo} />
+</BaseLayout>

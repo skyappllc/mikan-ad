@@ -1,0 +1,25 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  lead: string;
+}
+
+const { kicker, title, lead } = Astro.props;
+---
+
+<section class="page-hero" data-reveal>
+  <div class="page-hero-sparks" aria-hidden="true">
+    <span class="spark spark--mikan"></span>
+    <span class="spark spark--sky"></span>
+    <span class="spark spark--leaf"></span>
+  </div>
+  <div class="container page-hero-inner">
+    <p class="kicker">{kicker}</p>
+    <h1>{title}</h1>
+    <p class="lead">{lead}</p>
+    <div class="hero-slot">
+      <slot />
+    </div>
+  </div>
+</section>

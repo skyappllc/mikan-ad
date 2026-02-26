@@ -1,0 +1,76 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { companyProfile, contactInfo, navigation } from '../data/site';
+---
+
+<BaseLayout
+  path="/company"
+  title="会社情報 | 株式会社みかん"
+  description="株式会社みかんの会社概要、所在地、代表者、設立年、事業内容をご案内します。"
+>
+  <Header navItems={navigation} currentPath={Astro.url.pathname} />
+
+  <main id="main-content">
+    <PageHero
+      kicker="Company"
+      title="会社情報"
+      lead="信頼性の高い運用体制を維持するため、情報を明確に開示しています。"
+    />
+
+    <section class="section">
+      <div class="container">
+        <SectionTitle en="Profile" ja="会社概要" />
+
+        <div class="company-layout">
+          <div class="neo-card" data-reveal>
+            <table class="company-table" aria-label="会社概要テーブル">
+              <tbody>
+                <tr>
+                  <th scope="row">会社名</th>
+                  <td>{companyProfile.name}</td>
+                </tr>
+                <tr>
+                  <th scope="row">所在地</th>
+                  <td>{companyProfile.address}</td>
+                </tr>
+                <tr>
+                  <th scope="row">代表者</th>
+                  <td>{companyProfile.ceo}</td>
+                </tr>
+                <tr>
+                  <th scope="row">設立</th>
+                  <td>{companyProfile.founded}</td>
+                </tr>
+                <tr>
+                  <th scope="row">業種</th>
+                  <td>{companyProfile.industry}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="stack" aria-label="企業姿勢">
+            <article class="neo-card" data-reveal data-reveal-delay="1">
+              <h3>Mission</h3>
+              <p>広告とテクノロジーの力で、意思決定と実行の質を高める支援を継続します。</p>
+            </article>
+            <article class="neo-card" data-reveal data-reveal-delay="2">
+              <h3>Value</h3>
+              <p>迅速さと正確さを両立し、状況共有を徹底した誠実なプロジェクト運営を行います。</p>
+            </article>
+            <article class="neo-card" data-reveal data-reveal-delay="3">
+              <h3>Contact</h3>
+              <p>協業相談や見積依頼は、<a class="text-link" href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a> までご連絡ください。</p>
+            </article>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer navItems={navigation} contact={contactInfo} />
+</BaseLayout>

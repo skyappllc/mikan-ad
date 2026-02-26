@@ -1,0 +1,15 @@
+---
+interface Props {
+  en: string;
+  ja: string;
+  description?: string;
+}
+
+const { en, ja, description } = Astro.props;
+---
+
+<header class="section-title" data-reveal>
+  <p class="kicker">{en}</p>
+  <h2>{ja}</h2>
+  {description && <p>{description}</p>}
+</header>

@@ -1,0 +1,81 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactInfo, navigation, services } from '../data/site';
+---
+
+<BaseLayout
+  path="/services"
+  title="サービス | 株式会社みかん"
+  description="株式会社みかんが提供する各種広告手配、ポスティングサービス、システム開発・運用の詳細をご紹介します。"
+>
+  <Header navItems={navigation} currentPath={Astro.url.pathname} />
+
+  <main id="main-content">
+    <PageHero
+      kicker="Services"
+      title="サービス"
+      lead="広告施策とシステム施策を分断せず、目的から逆算して実行できるプランを設計します。"
+    >
+      <a class="neo-btn" href="/contact">相談する</a>
+    </PageHero>
+
+    <section class="section section--alt">
+      <div class="container">
+        <SectionTitle en="Lineup" ja="提供領域" />
+
+        <div class="card-grid card-grid--3">
+          {
+            services.map((service, index) => (
+              <article class="neo-card service-card" data-accent={service.accent} data-reveal data-reveal-delay={String(index + 1)}>
+                <h3>{service.title}</h3>
+                <p>{service.summary}</p>
+                <ul role="list" class="list-check">
+                  {service.details.map((detail) => <li>{detail}</li>)}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <SectionTitle
+          en="Flow"
+          ja="ご支援の進め方"
+          description="初期ヒアリングから運用改善まで、意思決定しやすい進行を重視します。"
+        />
+
+        <ol class="flow-list" role="list">
+          <li class="neo-card" data-reveal data-reveal-delay="1">
+            <h3>1. ヒアリング</h3>
+            <p>事業目標、ターゲット、既存施策、予算、スケジュールを整理します。</p>
+          </li>
+          <li class="neo-card" data-reveal data-reveal-delay="2">
+            <h3>2. 施策設計</h3>
+            <p>広告・システムの両面から優先順位を決め、実行計画を定義します。</p>
+          </li>
+          <li class="neo-card" data-reveal data-reveal-delay="3">
+            <h3>3. 実行・運用</h3>
+            <p>施策を実行し、KPIを追いながら改善に必要な打ち手を反映します。</p>
+          </li>
+          <li class="neo-card" data-reveal data-reveal-delay="4">
+            <h3>4. レビュー</h3>
+            <p>成果と課題を共有し、次サイクルに向けた具体策を合意します。</p>
+          </li>
+        </ol>
+
+        <div class="section-cta" data-reveal data-reveal-delay="5">
+          <a class="neo-btn" href="/contact">{contactInfo.email} へ相談する</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer navItems={navigation} contact={contactInfo} />
+</BaseLayout>
