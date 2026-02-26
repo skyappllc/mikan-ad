@@ -1,0 +1,155 @@
+---
+const navLinks = [
+  { href: '#about', label: '会社概要' },
+  { href: '#services', label: 'サービス' },
+  { href: '#company', label: '会社情報' },
+  { href: '#contact', label: 'お問い合わせ' },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-paper border-b-[3px] border-ink"
+  style="border-bottom: 3px solid #1A1A1A;"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- ロゴ -->
+      <a
+        href="#"
+        class="flex items-center gap-2 font-black text-xl md:text-2xl text-ink no-underline group"
+        aria-label="株式会社みかん トップへ"
+      >
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-mikan border-[3px] border-ink text-white text-base transition-transform duration-200 group-hover:rotate-12">
+          🍊
+        </span>
+        <span class="tracking-tight">
+          <span class="text-mikan">みかん</span>
+        </span>
+      </a>
+
+      <!-- デスクトップナビゲーション -->
+      <nav aria-label="メインナビゲーション" class="hidden md:block">
+        <ul class="flex items-center gap-1" role="list">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="relative px-4 py-2 font-bold text-ink no-underline text-sm transition-colors duration-200 hover:text-mikan group"
+              >
+                {link.label}
+                <span
+                  class="absolute bottom-0 left-4 right-4 h-[3px] bg-mikan scale-x-0 origin-left transition-transform duration-200 group-hover:scale-x-100"
+                  aria-hidden="true"
+                />
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="#contact"
+              class="ml-2 px-5 py-2 bg-mikan text-white font-bold text-sm brutal-btn inline-block no-underline"
+            >
+              お問い合わせ
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- モバイル: ハンバーガーボタン -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden flex flex-col gap-1.5 p-2 border-[3px] border-ink bg-paper"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="block w-6 h-[3px] bg-ink transition-all duration-200" id="hamburger-1"></span>
+        <span class="block w-6 h-[3px] bg-ink transition-all duration-200" id="hamburger-2"></span>
+        <span class="block w-6 h-[3px] bg-ink transition-all duration-200" id="hamburger-3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- モバイルメニュー -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t-[3px] border-ink bg-paper"
+    role="navigation"
+    aria-label="モバイルナビゲーション"
+  >
+    <ul class="flex flex-col" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="block px-6 py-4 font-bold text-ink border-b-[2px] border-ink border-opacity-20 no-underline hover:bg-mikan-pale transition-colors duration-150"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li class="p-4">
+        <a
+          href="#contact"
+          class="block text-center px-5 py-3 bg-mikan text-white font-bold brutal-btn no-underline"
+        >
+          お問い合わせ
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<!-- ヘッダー分の余白 -->
+<div class="h-16 md:h-20" aria-hidden="true"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const h1 = document.getElementById('hamburger-1');
+  const h2 = document.getElementById('hamburger-2');
+  const h3 = document.getElementById('hamburger-3');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+
+      if (isOpen) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'メニューを開く');
+        h1?.classList.remove('rotate-45', 'translate-y-[7.5px]');
+        h2?.classList.remove('opacity-0');
+        h3?.classList.remove('-rotate-45', '-translate-y-[7.5px]');
+      } else {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'メニューを閉じる');
+        h1?.classList.add('rotate-45', 'translate-y-[7.5px]');
+        h2?.classList.add('opacity-0');
+        h3?.classList.add('-rotate-45', '-translate-y-[7.5px]');
+      }
+    });
+
+    // メニュー内リンクをクリックしたら閉じる
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'メニューを開く');
+        h1?.classList.remove('rotate-45', 'translate-y-[7.5px]');
+        h2?.classList.remove('opacity-0');
+        h3?.classList.remove('-rotate-45', '-translate-y-[7.5px]');
+      });
+    });
+  }
+</script>
+
+<style>
+  #site-header.scrolled {
+    background-color: rgba(250, 250, 250, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+</style>
