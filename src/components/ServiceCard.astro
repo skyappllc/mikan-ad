@@ -1,0 +1,77 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+  accentColor: string;
+  accentBg: string;
+  delay?: string;
+}
+
+const {
+  title,
+  description,
+  icon,
+  features,
+  accentColor,
+  accentBg,
+  delay,
+} = Astro.props;
+---
+
+<article
+  class="group bg-white border-[3px] border-ink flex flex-col overflow-hidden transition-all duration-150 cursor-default"
+  style={`box-shadow: 6px 6px 0 #1A1A1A;`}
+  data-reveal
+  data-reveal-delay={delay}
+>
+  <!-- カラーヘッダーバー -->
+  <div
+    class="h-3 w-full flex-shrink-0 border-b-[3px] border-ink"
+    style={`background-color: ${accentColor};`}
+  ></div>
+
+  <div class="p-6 md:p-8 flex flex-col flex-1">
+    <!-- アイコン + タイトル -->
+    <div class="flex items-start gap-4 mb-4">
+      <div
+        class="flex-shrink-0 w-14 h-14 flex items-center justify-center text-3xl border-[3px] border-ink transition-transform duration-200 group-hover:scale-110"
+        style={`background-color: ${accentBg};`}
+      >
+        {icon}
+      </div>
+      <div class="pt-1">
+        <h3 class="text-xl md:text-2xl font-black text-ink leading-tight">{title}</h3>
+      </div>
+    </div>
+
+    <!-- 説明 -->
+    <p class="text-sm md:text-base text-ink opacity-75 leading-relaxed mb-6">
+      {description}
+    </p>
+
+    <!-- フィーチャーリスト -->
+    <ul class="flex flex-col gap-2 mt-auto" role="list">
+      {features.map((feature) => (
+        <li class="flex items-start gap-2 text-sm font-medium text-ink">
+          <span
+            class="flex-shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center rounded-sm border-2 border-ink text-xs font-black"
+            style={`background-color: ${accentColor}; color: white;`}
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+          {feature}
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>
+
+<style>
+  article:hover {
+    box-shadow: 3px 3px 0 #1A1A1A !important;
+    transform: translate(3px, 3px);
+  }
+</style>

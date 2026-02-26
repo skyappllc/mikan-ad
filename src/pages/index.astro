@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import CompanyInfo from '../components/CompanyInfo.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="株式会社みかん | 広告・システム開発"
+  description="株式会社みかんは、各種広告手配・ポスティングサービス・システム開発・運用を提供する企業です。広告とテクノロジーで、ビジネスを加速します。"
+>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <About />
+    <Services />
+    <CompanyInfo />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

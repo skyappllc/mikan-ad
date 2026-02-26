@@ -1,0 +1,107 @@
+---
+const companyData = [
+  { label: '会社名', value: '株式会社みかん' },
+  { label: '英語表記', value: 'MIKAN Co., Ltd.' },
+  { label: '設立', value: '2015年' },
+  { label: '代表者', value: '代表取締役' },
+  { label: '所在地', value: '日本' },
+  { label: '事業内容', value: '広告業、システム開発業、ポスティングサービス' },
+];
+---
+
+<section
+  id="company"
+  class="py-20 md:py-28"
+  style="background-color: #FFF3E0;"
+  aria-labelledby="company-heading"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <!-- セクションヘッダー -->
+    <div class="mb-16" data-reveal>
+      <span class="inline-block px-4 py-1 bg-ink text-white font-bold text-xs tracking-widest uppercase mb-4">
+        Company
+      </span>
+      <h2
+        id="company-heading"
+        class="text-4xl md:text-5xl lg:text-6xl font-black text-ink leading-tight"
+      >
+        会社情報
+      </h2>
+      <div class="mt-4 h-[4px] w-24 bg-mikan"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+
+      <!-- テーブル -->
+      <div class="lg:col-span-3" data-reveal data-reveal-delay="1">
+        <div
+          class="overflow-hidden border-[3px] border-ink"
+          style="box-shadow: 6px 6px 0 #1A1A1A;"
+        >
+          <table class="w-full border-collapse" aria-label="会社情報">
+            <caption class="sr-only">株式会社みかん 会社情報一覧</caption>
+            <tbody>
+              {companyData.map((row, index) => (
+                <tr
+                  class={`border-b-[2px] border-ink last:border-b-0 transition-colors duration-150 hover:bg-mikan/10 ${
+                    index % 2 === 0 ? 'bg-white' : 'bg-mikan-pale'
+                  }`}
+                >
+                  <th
+                    scope="row"
+                    class="px-6 py-4 text-left font-black text-sm text-ink border-r-[2px] border-ink whitespace-nowrap w-36 md:w-44"
+                  >
+                    {row.label}
+                  </th>
+                  <td class="px-6 py-4 text-sm md:text-base font-medium text-ink">
+                    {row.value}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- サイドデコレーション -->
+      <div class="lg:col-span-2 flex flex-col gap-6" data-reveal data-reveal-delay="2">
+
+        <!-- ビジョンカード -->
+        <div
+          class="p-8 bg-ink text-white border-[3px] border-ink"
+          style="box-shadow: 6px 6px 0 #FF8C00;"
+        >
+          <div class="text-4xl mb-4">🍊</div>
+          <h3 class="text-xl font-black mb-3">ビジョン</h3>
+          <p class="text-sm leading-relaxed opacity-85">
+            「みかん」のように、鮮やかで親しみやすく、
+            そして確かな栄養（価値）を届ける企業を目指します。
+            すべてのクライアントのビジネスに、
+            太陽のように明るい未来を照らします。
+          </p>
+        </div>
+
+        <!-- スタッツカード -->
+        <div
+          class="p-8 bg-white border-[3px] border-ink"
+          style="box-shadow: 6px 6px 0 #1A1A1A;"
+        >
+          <h3 class="text-lg font-black text-ink mb-6">実績</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-4 bg-mikan-pale border-[2px] border-ink">
+              <div class="text-3xl font-black text-mikan">10+</div>
+              <div class="text-xs font-bold text-ink mt-1 opacity-70">年の実績</div>
+            </div>
+            <div class="text-center p-4 bg-mikan-pale border-[2px] border-ink">
+              <div class="text-3xl font-black text-mikan">3</div>
+              <div class="text-xs font-bold text-ink mt-1 opacity-70">事業領域</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

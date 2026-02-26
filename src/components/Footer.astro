@@ -1,0 +1,102 @@
+---
+const currentYear = new Date().getFullYear();
+const navLinks = [
+  { href: '#about', label: '会社概要' },
+  { href: '#services', label: 'サービス' },
+  { href: '#company', label: '会社情報' },
+  { href: '#contact', label: 'お問い合わせ' },
+];
+---
+
+<footer
+  class="border-t-[3px] border-mikan"
+  style="background-color: #1A1A1A;"
+  role="contentinfo"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+
+      <!-- ブランドカラム -->
+      <div class="md:col-span-1">
+        <a
+          href="#"
+          class="inline-flex items-center gap-2 font-black text-2xl text-white no-underline mb-4 group"
+          aria-label="株式会社みかん トップへ"
+        >
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-mikan border-[3px] border-mikan-light text-xl transition-transform duration-200 group-hover:rotate-12">
+            🍊
+          </span>
+          <span>
+            <span class="text-mikan">みかん</span>
+          </span>
+        </a>
+        <p class="text-sm text-white opacity-50 leading-relaxed max-w-xs">
+          広告業・システム開発業を通じて、
+          クライアントのビジネス成長を
+          力強くサポートします。
+        </p>
+      </div>
+
+      <!-- ナビカラム -->
+      <div>
+        <h3 class="text-xs font-black text-white tracking-widest uppercase mb-4 opacity-50">Navigation</h3>
+        <ul class="flex flex-col gap-2" role="list">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm font-medium text-white opacity-70 no-underline hover:opacity-100 hover:text-mikan transition-all duration-150"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- コンタクトカラム -->
+      <div>
+        <h3 class="text-xs font-black text-white tracking-widest uppercase mb-4 opacity-50">Contact</h3>
+        <a
+          href="mailto:info@mikan-corp.jp"
+          class="text-sm font-medium text-mikan no-underline hover:underline block mb-2"
+        >
+          info@mikan-corp.jp
+        </a>
+        <p class="text-xs text-white opacity-40">
+          平日 9:00 〜 18:00
+        </p>
+
+        <div class="mt-6">
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-mikan text-white font-bold text-sm no-underline"
+            style="border: 2px solid #FFB347; box-shadow: 3px 3px 0 #FF8C00; transition: box-shadow 0.1s, transform 0.1s;"
+            onmouseover="this.style.boxShadow='1px 1px 0 #FF8C00'; this.style.transform='translate(2px,2px)';"
+            onmouseout="this.style.boxShadow='3px 3px 0 #FF8C00'; this.style.transform='translate(0,0)';"
+          >
+            お問い合わせ
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 下部ライン -->
+    <div class="border-t border-white border-opacity-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white opacity-40">
+        © 2015–{currentYear} 株式会社みかん. All rights reserved.
+      </p>
+      <div class="flex items-center gap-1">
+        <span class="text-xs text-white opacity-30">Made with</span>
+        <span class="text-sm" aria-label="みかん">🍊</span>
+        <span class="text-xs text-white opacity-30">& ☕</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
