@@ -13,6 +13,8 @@ Astro 5 + Tailwind CSS v4 で構築した静的サイト。Cloudflare Pages に�
 | スタイリング | [Tailwind CSS](https://tailwindcss.com/) v4（`@tailwindcss/vite`） |
 | パッケージマネージャ | [bun](https://bun.sh/) |
 | デプロイ | [Cloudflare Pages](https://pages.cloudflare.com/) |
+| API（お問い合わせ） | [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/) |
+| メール送信 | [Resend](https://resend.com/) |
 | フォント | Noto Sans JP（Google Fonts CDN） |
 
 ---
@@ -51,6 +53,30 @@ bun run build
 bun run preview
 ```
 
+### お問い合わせフォームのローカルテスト
+
+`bun run dev` では Cloudflare Pages Functions が動作しないため、フォーム送信のテストには `wrangler pages dev` を使う。
+
+**1. `.dev.vars` を作成する（Git 管理外）**
+
+```bash
+cat <<'EOF' > .dev.vars
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxx
+CONTACT_TO_EMAIL=your-address@example.com
+EOF
+```
+
+> `CONTACT_TO_EMAIL` は Resend アカウントに登録したメールアドレスを指定する（未検証ドメインの場合、自分のアドレス宛のみ送信可能）。
+
+**2. ビルドして wrangler で起動する**
+
+```bash
+bun run build
+npx wrangler pages dev dist
+```
+
+ブラウザで [http://localhost:8788](http://localhost:8788) を開く。
+
 ---
 
 ## デプロイ（Cloudflare Pages）
@@ -79,6 +105,17 @@ wrangler pages deploy dist
 | ビルド出力ディレクトリ | `dist` |
 | Node.js バージョン | 20 以上 |
 
+### 環境変数の設定（必須）
+
+Cloudflare Pages ダッシュボード → **Settings > Environment variables** で以下を設定する。
+
+| 変数名 | 説明 | 備考 |
+|---|---|---|
+| `RESEND_API_KEY` | Resend の API キー | 暗号化して登録 |
+| `CONTACT_FROM_EMAIL` | 送信元メールアドレス（例: `noreply@mikan-corp.jp`） | ドメイン検証後に設定 |
+
+> `CONTACT_TO_EMAIL`（宛先）は `wrangler.toml` の `[vars]` に記載済み。変更する場合はファイルを直接編集するか、ダッシュボードで上書き設定する。
+
 ---
 
 ## プロジェクト構成
@@ -88,11 +125,16 @@ corporate_site/
 ├── astro.config.mjs          # Astro + Tailwind v4 設定
 ├── package.json
 ├── tsconfig.json
-├── wrangler.toml             # Cloudflare Pages 設定
+├── wrangler.toml             # Cloudflare Pages 設定（CONTACT_TO_EMAIL など）
+├── functions/
+│   └── api/
+│       └── contact.ts        # POST /api/contact（Resend メール送信）
 ├── public/
 │   ├── favicon.svg
 │   └── _headers              # Cloudflare キャッシュ・セキュリティヘッダー
 └── src/
+    ├── data/
+    │   └── site.ts           # 共有定数（NAV_LINKS, INQUIRY_TYPES など）
     ├── styles/
     │   └── global.css        # Tailwind v4 @theme + アニメーション定義
     ├── layouts/
@@ -104,7 +146,8 @@ corporate_site/
     │   ├── Services.astro    # サービス紹介
     │   ├── ServiceCard.astro # サービスカード（再利用コンポーネント）
     │   ├── CompanyInfo.astro # 会社情報テーブル
-    │   ├── Contact.astro     # お問い合わせ
+    │   ├── Contact.astro     # お問い合わせセクション
+    │   ├── ContactForm.astro # お問い合わせフォーム
     │   └── Footer.astro      # フッター
     └── pages/
         └── index.astro       # メインページ
@@ -114,13 +157,16 @@ corporate_site/
 
 ## カスタマイズ
 
-### お問い合わせメールアドレス
+### お問い合わせ宛先メールアドレス
 
-`src/components/Contact.astro` の `email` 変数を変更する。
+`wrangler.toml` の `CONTACT_TO_EMAIL` を変更する。
 
-```astro
-const email = 'your-email@example.com';
+```toml
+[vars]
+CONTACT_TO_EMAIL = "your-address@example.com"
 ```
+
+または Cloudflare Pages ダッシュボードの環境変数で上書きする（こちらが優先される）。
 
 ### カラーテーマ
 
