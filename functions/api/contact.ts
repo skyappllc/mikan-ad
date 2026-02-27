@@ -33,46 +33,73 @@ function json(body: object, status = 200): Response {
   return new Response(JSON.stringify(body), { status, headers: CORS_HEADERS });
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function readString(value: unknown): string | undefined {
+  return typeof value === 'string' ? value : undefined;
+}
+
 export async function onRequestPost(context: { request: Request; env: Env }): Promise<Response> {
   const { request, env } = context;
 
   // JSON パース
-  let body: Record<string, string>;
+  let parsedBody: unknown;
   try {
-    body = await request.json();
+    parsedBody = await request.json();
   } catch {
     return json({ success: false, error: '不正なリクエストです。' }, 400);
   }
 
-  const { name, email, company, inquiry_type, message, _honey, _timestamp } = body;
+  if (!isRecord(parsedBody)) {
+    return json({ success: false, error: '不正なリクエストです。' }, 400);
+  }
+
+  const name = readString(parsedBody.name);
+  const email = readString(parsedBody.email);
+  const company = readString(parsedBody.company);
+  const inquiryType = readString(parsedBody.inquiry_type) ?? '';
+  const message = readString(parsedBody.message);
+  const honey = readString(parsedBody._honey);
+  const timestampRaw = parsedBody._timestamp;
 
   // ハニーポット判定（偽の成功を返してボットを混乱させる）
-  if (_honey) {
+  if (honey) {
     return json({ success: true, message: 'お問い合わせを受け付けました。' });
   }
 
   // タイムスタンプ判定（3秒未満の送信はボット扱い）
-  const ts = parseInt(_timestamp ?? '0', 10);
-  if (Number.isFinite(ts) && Date.now() - ts < 3000) {
+  const ts = typeof timestampRaw === 'number'
+    ? timestampRaw
+    : typeof timestampRaw === 'string'
+      ? Number.parseInt(timestampRaw, 10)
+      : Number.NaN;
+  const elapsedSinceSubmit = Date.now() - ts;
+  if (Number.isFinite(ts) && elapsedSinceSubmit >= 0 && elapsedSinceSubmit < 3000) {
     return json({ success: true, message: 'お問い合わせを受け付けました。' });
   }
 
   // バリデーション
   const errors: string[] = [];
+  const trimmedName = name?.trim() ?? '';
+  const trimmedEmail = email?.trim() ?? '';
+  const trimmedCompany = company?.trim() ?? '';
+  const trimmedMessage = message?.trim() ?? '';
 
-  if (!name?.trim() || name.trim().length > 100) {
+  if (!trimmedName || trimmedName.length > 100) {
     errors.push('お名前は1〜100文字で入力してください。');
   }
-  if (!email?.trim() || !EMAIL_RE.test(email.trim())) {
+  if (!trimmedEmail || !EMAIL_RE.test(trimmedEmail)) {
     errors.push('正しいメールアドレスを入力してください。');
   }
-  if (company && company.trim().length > 100) {
+  if (trimmedCompany.length > 100) {
     errors.push('会社名は100文字以内で入力してください。');
   }
-  if (!inquiry_type || !VALID_INQUIRY_TYPES.has(inquiry_type)) {
+  if (!VALID_INQUIRY_TYPES.has(inquiryType)) {
     errors.push('お問い合わせ種別を選択してください。');
   }
-  if (!message?.trim() || message.trim().length < 10 || message.trim().length > 2000) {
+  if (!trimmedMessage || trimmedMessage.length < 10 || trimmedMessage.length > 2000) {
     errors.push('お問い合わせ内容は10〜2000文字で入力してください。');
   }
 
@@ -87,13 +114,13 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
   // メール送信
   const toEmail   = env.CONTACT_TO_EMAIL   ?? 'contact@skyapp.dev';
   const fromEmail = env.CONTACT_FROM_EMAIL ?? 'onboarding@resend.dev';
-  const inquiryLabel = INQUIRY_LABELS[inquiry_type] ?? inquiry_type;
+  const inquiryLabel = INQUIRY_LABELS[inquiryType] ?? inquiryType;
 
-  const safeName    = escapeHtml(name.trim());
-  const safeEmail   = escapeHtml(email.trim());
-  const safeCompany = company?.trim() ? escapeHtml(company.trim()) : '（未入力）';
+  const safeName    = escapeHtml(trimmedName);
+  const safeEmail   = escapeHtml(trimmedEmail);
+  const safeCompany = trimmedCompany ? escapeHtml(trimmedCompany) : '（未入力）';
   const safeInquiry = escapeHtml(inquiryLabel);
-  const safeMessage = escapeHtml(message.trim()).replace(/\n/g, '<br>');
+  const safeMessage = escapeHtml(trimmedMessage).replace(/\n/g, '<br>');
 
   const htmlBody = `
 <h2 style="font-family:sans-serif;color:#1A1A1A;">お問い合わせが届きました</h2>
@@ -127,13 +154,13 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
   const textBody = [
     'お問い合わせが届きました',
     '',
-    `お名前: ${name.trim()}`,
-    `メールアドレス: ${email.trim()}`,
-    `会社名: ${company?.trim() || '（未入力）'}`,
+    `お名前: ${trimmedName}`,
+    `メールアドレス: ${trimmedEmail}`,
+    `会社名: ${trimmedCompany || '（未入力）'}`,
     `種別: ${inquiryLabel}`,
     '',
     '内容:',
-    message.trim(),
+    trimmedMessage,
   ].join('\n');
 
   try {
@@ -146,8 +173,8 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
       body: JSON.stringify({
         from:     fromEmail,
         to:       [toEmail],
-        reply_to: email.trim(),
-        subject:  `【お問い合わせ】${inquiryLabel} - ${name.trim()}様`,
+        reply_to: trimmedEmail,
+        subject:  `【お問い合わせ】${inquiryLabel} - ${trimmedName}様`,
         html:     htmlBody,
         text:     textBody,
       }),
