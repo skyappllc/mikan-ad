@@ -1,16 +1,11 @@
 ---
+import { NAV_LINKS, CONTACT_EMAIL, COMPANY_NAME, FOUNDED_YEAR } from '../data/site';
+
 const currentYear = new Date().getFullYear();
-const navLinks = [
-  { href: '#about', label: '会社概要' },
-  { href: '#services', label: 'サービス' },
-  { href: '#company', label: '会社情報' },
-  { href: '#contact', label: 'お問い合わせ' },
-];
 ---
 
 <footer
-  class="border-t-[3px] border-mikan"
-  style="background-color: #1A1A1A;"
+  class="border-t-[3px] border-mikan bg-ink"
   role="contentinfo"
 >
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
@@ -28,7 +23,7 @@ const navLinks = [
             🍊
           </span>
           <span>
-            <span class="text-mikan">みかん</span>
+            株式会社<span class="text-mikan">みかん</span>
           </span>
         </a>
         <p class="text-sm text-white opacity-50 leading-relaxed max-w-xs">
@@ -42,7 +37,7 @@ const navLinks = [
       <div>
         <h3 class="text-xs font-black text-white tracking-widest uppercase mb-4 opacity-50">Navigation</h3>
         <ul class="flex flex-col gap-2" role="list">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <li>
               <a
                 href={link.href}
@@ -59,10 +54,10 @@ const navLinks = [
       <div>
         <h3 class="text-xs font-black text-white tracking-widest uppercase mb-4 opacity-50">Contact</h3>
         <a
-          href="mailto:info@mikan-corp.jp"
+          href={`mailto:${CONTACT_EMAIL}`}
           class="text-sm font-medium text-mikan no-underline hover:underline block mb-2"
         >
-          info@mikan-corp.jp
+          {CONTACT_EMAIL}
         </a>
         <p class="text-xs text-white opacity-40">
           平日 9:00 〜 18:00
@@ -71,10 +66,7 @@ const navLinks = [
         <div class="mt-6">
           <a
             href="#contact"
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-mikan text-white font-bold text-sm no-underline"
-            style="border: 2px solid #FFB347; box-shadow: 3px 3px 0 #FF8C00; transition: box-shadow 0.1s, transform 0.1s;"
-            onmouseover="this.style.boxShadow='1px 1px 0 #FF8C00'; this.style.transform='translate(2px,2px)';"
-            onmouseout="this.style.boxShadow='3px 3px 0 #FF8C00'; this.style.transform='translate(0,0)';"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-mikan text-white font-bold text-sm no-underline brutal-btn-orange"
           >
             お問い合わせ
             <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -89,7 +81,7 @@ const navLinks = [
     <!-- 下部ライン -->
     <div class="border-t border-white border-opacity-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-xs text-white opacity-40">
-        © 2015–{currentYear} 株式会社みかん. All rights reserved.
+        © {FOUNDED_YEAR}–{currentYear} {COMPANY_NAME}. All rights reserved.
       </p>
       <div class="flex items-center gap-1">
         <span class="text-xs text-white opacity-30">Made with</span>

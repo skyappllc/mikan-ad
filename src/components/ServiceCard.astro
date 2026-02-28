@@ -7,6 +7,7 @@ interface Props {
   accentColor: string;
   accentBg: string;
   delay?: string;
+  notice?: string;
 }
 
 const {
@@ -17,12 +18,12 @@ const {
   accentColor,
   accentBg,
   delay,
+  notice,
 } = Astro.props;
 ---
 
 <article
-  class="group bg-white border-[3px] border-ink flex flex-col overflow-hidden transition-all duration-150 cursor-default"
-  style={`box-shadow: 6px 6px 0 #1A1A1A;`}
+  class="group bg-white border-[3px] border-ink brutal-shadow-lg flex flex-col overflow-hidden transition-all duration-150 cursor-default"
   data-reveal
   data-reveal-delay={delay}
 >
@@ -47,9 +48,14 @@ const {
     </div>
 
     <!-- 説明 -->
-    <p class="text-sm md:text-base text-ink opacity-75 leading-relaxed mb-6">
+    <p class="text-sm md:text-base text-ink opacity-75 leading-relaxed mb-2">
       {description}
     </p>
+    {notice ? (
+      <p class="text-xs text-ink opacity-40 mb-4">{notice}</p>
+    ) : (
+      <div class="mb-4"></div>
+    )}
 
     <!-- フィーチャーリスト -->
     <ul class="flex flex-col gap-2 mt-auto" role="list">
@@ -66,12 +72,13 @@ const {
         </li>
       ))}
     </ul>
+
   </div>
 </article>
 
 <style>
   article:hover {
-    box-shadow: 3px 3px 0 #1A1A1A !important;
+    box-shadow: 3px 3px 0 #1A1A1A;
     transform: translate(3px, 3px);
   }
 </style>

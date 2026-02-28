@@ -2,20 +2,13 @@
 ---
 
 <section
-  class="relative min-h-screen flex items-center justify-center overflow-hidden"
-  style="background-color: #FF8C00;"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-mikan"
   aria-label="ヒーローセクション"
 >
   <!-- グリッドパターン背景 -->
   <div
-    class="absolute inset-0 opacity-15 pointer-events-none"
+    class="absolute inset-0 bg-pattern-grid opacity-15 pointer-events-none"
     aria-hidden="true"
-    style="
-      background-image:
-        linear-gradient(#1A1A1A 1px, transparent 1px),
-        linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
-      background-size: 40px 40px;
-    "
   ></div>
 
   <!-- デコレーション要素 -->
@@ -37,12 +30,12 @@
         <!-- バッジ -->
         <div class="hero-title inline-flex items-center gap-2 mb-6">
           <span
-            class="px-4 py-1.5 bg-ink text-white font-bold text-sm tracking-widest uppercase border-[3px] border-ink"
+            class="px-4 py-1.5 bg-ink text-white font-bold text-sm tracking-widest uppercase border-[3px] border-ink brutal-shadow-sm"
           >
             Since 2015
           </span>
           <span
-            class="px-4 py-1.5 bg-white text-ink font-bold text-sm border-[3px] border-ink"
+            class="px-4 py-1.5 bg-white text-ink font-bold text-sm border-[3px] border-ink brutal-shadow-sm"
           >
             広告 × テクノロジー
           </span>
@@ -50,7 +43,7 @@
 
         <!-- メインタイトル -->
         <h1
-          class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-ink leading-[1.0] tracking-tighter mb-6"
+          class="hero-title font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-ink leading-[1.1] mb-6"
         >
           株式会社<br />
           <span class="text-white" style="text-shadow: 4px 4px 0 #1A1A1A;">みかん</span>
@@ -135,20 +128,20 @@
 
           <!-- フローティングバッジ -->
           <div
-            class="absolute -top-2 -right-4 bg-white border-[3px] border-ink px-3 py-1.5 font-black text-sm"
-            style="box-shadow: 3px 3px 0 #1A1A1A; transform: rotate(6deg);"
+            class="absolute -top-2 -right-4 bg-white border-[3px] border-ink px-3 py-1.5 font-black text-sm brutal-shadow"
+            style="transform: rotate(6deg);"
           >
             広告 ✓
           </div>
           <div
-            class="absolute top-16 -left-8 bg-leaf text-white border-[3px] border-ink px-3 py-1.5 font-black text-sm"
-            style="box-shadow: 3px 3px 0 #1A1A1A; transform: rotate(-4deg);"
+            class="absolute top-16 -left-8 bg-leaf text-white border-[3px] border-ink px-3 py-1.5 font-black text-sm brutal-shadow"
+            style="transform: rotate(-4deg);"
           >
             システム ✓
           </div>
           <div
-            class="absolute bottom-12 -right-6 bg-sky text-white border-[3px] border-ink px-3 py-1.5 font-black text-sm"
-            style="box-shadow: 3px 3px 0 #1A1A1A; transform: rotate(3deg);"
+            class="absolute bottom-12 -right-6 bg-sky text-white border-[3px] border-ink px-3 py-1.5 font-black text-sm brutal-shadow"
+            style="transform: rotate(3deg);"
           >
             ポスティング ✓
           </div>

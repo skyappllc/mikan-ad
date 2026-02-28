@@ -3,19 +3,24 @@ const companyData = [
   { label: '会社名', value: '株式会社みかん' },
   { label: '英語表記', value: 'MIKAN Co., Ltd.' },
   { label: '設立', value: '2015年' },
-  { label: '代表者', value: '代表取締役' },
-  { label: '所在地', value: '日本' },
-  { label: '事業内容', value: '広告業、システム開発業、ポスティングサービス' },
+  { label: '代表者', value: '代表取締役 荒井宏明' },
+  { label: '所在地', value: '東京都板橋区中台3-27' },
+  { label: '事業内容', value: 'システム開発業、広告業、ポスティングサービス' },
 ];
 ---
 
 <section
   id="company"
-  class="py-20 md:py-28"
-  style="background-color: #FFF3E0;"
+  class="relative py-20 md:py-28 overflow-hidden bg-mikan-pale"
   aria-labelledby="company-heading"
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <!-- 装飾: クロスパターン背景 -->
+  <div class="absolute inset-0 bg-pattern-cross opacity-5 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- 装飾: 右上の大きな円 -->
+  <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full border-[6px] border-mikan opacity-15 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
 
     <!-- セクションヘッダー -->
     <div class="mb-16" data-reveal>
@@ -24,7 +29,7 @@ const companyData = [
       </span>
       <h2
         id="company-heading"
-        class="text-4xl md:text-5xl lg:text-6xl font-black text-ink leading-tight"
+        class="font-display text-4xl md:text-5xl lg:text-6xl text-ink leading-tight"
       >
         会社情報
       </h2>
@@ -35,10 +40,7 @@ const companyData = [
 
       <!-- テーブル -->
       <div class="lg:col-span-3" data-reveal data-reveal-delay="1">
-        <div
-          class="overflow-hidden border-[3px] border-ink"
-          style="box-shadow: 6px 6px 0 #1A1A1A;"
-        >
+        <div class="overflow-hidden border-[3px] border-ink brutal-shadow-lg">
           <table class="w-full border-collapse" aria-label="会社情報">
             <caption class="sr-only">株式会社みかん 会社情報一覧</caption>
             <tbody>
@@ -68,10 +70,7 @@ const companyData = [
       <div class="lg:col-span-2 flex flex-col gap-6" data-reveal data-reveal-delay="2">
 
         <!-- ビジョンカード -->
-        <div
-          class="p-8 bg-ink text-white border-[3px] border-ink"
-          style="box-shadow: 6px 6px 0 #FF8C00;"
-        >
+        <div class="p-8 bg-ink text-white border-[3px] border-ink brutal-shadow-lg-orange">
           <div class="text-4xl mb-4">🍊</div>
           <h3 class="text-xl font-black mb-3">ビジョン</h3>
           <p class="text-sm leading-relaxed opacity-85">
@@ -83,10 +82,7 @@ const companyData = [
         </div>
 
         <!-- スタッツカード -->
-        <div
-          class="p-8 bg-white border-[3px] border-ink"
-          style="box-shadow: 6px 6px 0 #1A1A1A;"
-        >
+        <div class="p-8 bg-white border-[3px] border-ink brutal-shadow-lg">
           <h3 class="text-lg font-black text-ink mb-6">実績</h3>
           <div class="grid grid-cols-2 gap-4">
             <div class="text-center p-4 bg-mikan-pale border-[2px] border-ink">
