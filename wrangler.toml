@@ -3,4 +3,4 @@ compatibility_date = "2024-01-01"
 pages_build_output_dir = "dist"
 
 [vars]
-CONTACT_TO_EMAIL = "info@mikan.ad"
+CONTACT_TO_EMAIL = "hello@mikan.ad"
