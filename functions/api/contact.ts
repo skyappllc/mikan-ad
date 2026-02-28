@@ -146,9 +146,14 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
     <td style="white-space:pre-wrap;">${safeMessage}</td>
   </tr>
 </table>
-<p style="color:#888;font-size:12px;margin-top:16px;font-family:sans-serif;">
-  このメールは株式会社みかん コーポレートサイトから自動送信されています。
-</p>
+<div style="margin-top:32px;padding:20px;background:#FFF3E0;border-left:4px solid #FF8C00;border-radius:8px;font-family:sans-serif;">
+  <p style="margin:0 0 4px;font-size:15px;font-weight:bold;color:#1A1A1A;">&#127818; 株式会社みかん</p>
+  <hr style="border:none;border-top:2px solid #FF8C00;margin:8px 0 12px;width:60px;">
+  <p style="margin:0 0 12px;font-size:12px;color:#666;">このメールはコーポレートサイトから自動送信されています。</p>
+  <p style="margin:0 0 4px;font-size:13px;color:#1A1A1A;">&#127760; <a href="https://mikan.ad" style="color:#FF8C00;text-decoration:none;font-weight:bold;">mikan.ad</a></p>
+  <p style="margin:0;font-size:13px;color:#1A1A1A;">&#9993;&#65039; <a href="mailto:info@mikan.ad" style="color:#FF8C00;text-decoration:none;">info@mikan.ad</a></p>
+</div>
+<p style="text-align:center;font-size:11px;color:#aaa;margin-top:16px;font-family:sans-serif;">&copy; ${new Date().getFullYear()} 株式会社みかん</p>
 `.trim();
 
   const textBody = [
