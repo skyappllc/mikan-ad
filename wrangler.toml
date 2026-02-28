@@ -1,6 +1,6 @@
-name = "mikan-corporate-site"
+name = "mikan-ad"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = "dist"
 
 [vars]
-CONTACT_TO_EMAIL = "contact@skyapp.dev"
+CONTACT_TO_EMAIL = "info@mikan.ad"

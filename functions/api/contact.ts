@@ -4,13 +4,13 @@ interface Env {
   CONTACT_FROM_EMAIL?: string;
 }
 
-const VALID_INQUIRY_TYPES = new Set(['advertising', 'posting', 'system-dev', 'other']);
+const VALID_INQUIRY_TYPES = new Set(['system-dev', 'ai', 'pm', 'other']);
 
 const INQUIRY_LABELS: Record<string, string> = {
-  advertising: '広告プランニング・媒体手配',
-  posting:     'ポスティングサービス',
   'system-dev': 'システム開発・Webアプリ',
-  other:       'その他のご相談',
+  ai:           'AI活用・開発のご相談',
+  pm:           'プロジェクトマネジメント',
+  other:        'その他のご相談',
 };
 
 function escapeHtml(str: string): string {
@@ -113,7 +113,7 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
 
   // メール送信
   const toEmail   = env.CONTACT_TO_EMAIL   ?? 'contact@skyapp.dev';
-  const fromEmail = env.CONTACT_FROM_EMAIL ?? 'onboarding@resend.dev';
+  const fromEmail = env.CONTACT_FROM_EMAIL ?? 'noreply@mikan.ad';
   const inquiryLabel = INQUIRY_LABELS[inquiryType] ?? inquiryType;
 
   const safeName    = escapeHtml(trimmedName);
