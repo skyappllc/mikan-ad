@@ -135,7 +135,7 @@ import ContactForm from './ContactForm.astro';
         if (!v) return 'メールアドレスを入力してください。';
         if (!EMAIL_RE.test(v)) return '正しいメールアドレスを入力してください。';
         return null;
-      case 'company':
+      case 'company_name':
         if (v.length > 100) return '会社名は100文字以内で入力してください。';
         return null;
       case 'inquiry_type':
@@ -165,7 +165,7 @@ import ContactForm from './ContactForm.astro';
     return (el as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement).value;
   }
 
-  const fields = ['name', 'email', 'company', 'inquiry_type', 'message'];
+  const fields = ['name', 'email', 'company_name', 'inquiry_type', 'message'];
   fields.forEach((fieldName) => {
     const el = document.getElementById(fieldName);
     if (!el) return;
@@ -220,7 +220,7 @@ import ContactForm from './ContactForm.astro';
     const data = {
       name:         (document.getElementById('name') as HTMLInputElement).value,
       email:        (document.getElementById('email') as HTMLInputElement).value,
-      company:      (document.getElementById('company') as HTMLInputElement).value,
+      company:      (document.getElementById('company_name') as HTMLInputElement).value,
       inquiry_type: (document.getElementById('inquiry_type') as HTMLSelectElement).value,
       message:      (document.getElementById('message') as HTMLTextAreaElement).value,
       _honey:       (document.getElementById('_honey') as HTMLInputElement)?.value ?? '',

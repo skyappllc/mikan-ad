@@ -151,7 +151,7 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
   <hr style="border:none;border-top:2px solid #FF8C00;margin:8px 0 12px;width:60px;">
   <p style="margin:0 0 12px;font-size:12px;color:#666;">このメールはコーポレートサイトから自動送信されています。</p>
   <p style="margin:0 0 4px;font-size:13px;color:#1A1A1A;">&#127760; <a href="https://mikan.ad" style="color:#FF8C00;text-decoration:none;font-weight:bold;">mikan.ad</a></p>
-  <p style="margin:0;font-size:13px;color:#1A1A1A;">&#9993;&#65039; <a href="mailto:info@mikan.ad" style="color:#FF8C00;text-decoration:none;">info@mikan.ad</a></p>
+  <p style="margin:0;font-size:13px;color:#1A1A1A;">&#9993;&#65039; <a href="mailto:hello@mikan.ad" style="color:#FF8C00;text-decoration:none;">hello@mikan.ad</a></p>
 </div>
 <p style="text-align:center;font-size:11px;color:#aaa;margin-top:16px;font-family:sans-serif;">&copy; ${new Date().getFullYear()} 株式会社みかん</p>
 `.trim();
